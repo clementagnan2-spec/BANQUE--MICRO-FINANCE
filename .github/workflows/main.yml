@@ -1,0 +1,40 @@
+name: Compiler BanqueGestion.exe
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les dépendances
+        run: python -m pip install --upgrade pip pyinstaller pillow
+
+      - name: Compiler le .exe
+        run: python -m PyInstaller --noconfirm --onefile --windowed --name BanqueGestion banque.py
+
+      - name: Publier le .exe (téléchargeable dans l'onglet Actions)
+        uses: actions/upload-artifact@v4
+        with:
+          name: BanqueGestion-windows
+          path: dist/BanqueGestion.exe
+
+      - name: Créer une Release (uniquement si tag vX.Y)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/BanqueGestion.exe
