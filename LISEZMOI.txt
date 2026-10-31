@@ -1,0 +1,15 @@
+BANQUE / MICROFINANCE - Gestion epargne, DAT, credits, engagements par signature (PCB UMOA)
+
+COMPILER SUR GITHUB
+1. Creez un depot GitHub (prive de preference).
+2. Envoyez-y tout le contenu de ce zip (banque.py, build.bat, LISEZMOI.txt et le dossier .github).
+   Astuce : si le dossier .github n'est pas pris en compte, creez le fichier a la main :
+   Add file > Create new file > nom : .github/workflows/build.yml puis collez le contenu.
+3. Onglet Actions : attendez la coche verte, puis telechargez "BanqueGestion-windows" (Artifacts).
+
+COMPILER SUR WINDOWS
+Installez Python 3.10+ puis double-cliquez sur build.bat -> dist\BanqueGestion.exe
+
+NOTES
+- La base banque.db et le dossier photos sont crees a cote du .exe : sauvegardez-les regulierement.
+- Le plan comptable (PCB) est un extrait a valider avec votre comptable.
